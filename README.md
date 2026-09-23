@@ -1,94 +1,108 @@
 # PVA2 - Programování a vývoj aplikací
 ## Co umím z PVA1
 
-Čas na odevzdání není omezen. Úkoly jsou však jednoduché, a měli by jste je zvládnout do 45 minut.
-Potřebujete-li více času, neváhejte se na něj zeptat. Opakování není na známky. Vypracujte jej sami, bez cizí pomoci, bez použití internetu a nástrojů.
+Vítejte zpět! Než se pustíme do nové látky, potřebuji vědět, kde každý z vás právě je.
+Tohle opakování **není na známky** – je to mapa, podle které si naplánujeme, na co navážeme
+a co si společně připomeneme.
 
+Ukažte, co umíte:
+- Použijte všechno, co jste se v programování naučili – proměnné, podmínky, cykly, funkce,
+  seznamy, slovníky, práci s řetězci… Čím víc toho do řešení vložíte, tím lépe.
+- Nevíte si s něčím rady? Nevadí. Nevzdávejte to a udělejte, co zvládnete. I částečné
+  řešení nebo jen rozpracovaný nápad má cenu.
+- Na nedokončenou část napište komentář, jak byste postupovali. I to mi hodně řekne.
+- Nezáleží na tom, kolik stihnete, ale co opravdu umíte vy sami.
 
-## Obsah
+Úkoly byste měli zvládnout zhruba za 45 minut. Potřebujete-li více času, řekněte si.
+
+Pravidla:
+- Pracujte sami, bez pomoci spolužáků.
+- Nepoužívejte internet ani AI asistenty (ChatGPT, Copilot apod.). Vývojové prostředí a jeho nápověda povoleny jsou.
+- Svůj kód pište do souboru `reseni.py` pod připravená data.
+
+Hodně štěstí – věřím, že toho umíte víc, než si myslíte!
 
 ## Hodnocení zakázky
 
-Obchodníci v naší softwarové firmě používají jednoduchý systém, aby odhadli šanci na úspěch potenciální zakázky.
-  
-Každé zakázce přiřadí body od 0 do 10 a platí:
-- Pokud má zakázka méně než 5 bodů, šance na získání je `malá`.
-- Pokud má zakázka 6 až 8 bodů, šance na získání je `střední`.
-- Pokud má zakázka více bodů, šance na získání je `vysoká`.
+Obchodníci v naší softwarové firmě odhadují šanci na získání zakázky jednoduchým bodovým systémem.
+Každá zakázka získá 0 až 10 bodů podle těchto kritérií:
 
-Body přidělují podle následujících kritérií:
-- Odvětví `odvetvi`: Firma nejlépe prodává do `automotive`, o něco hůře do `retail`.
-Pokud potenciální zákazník podniká v `automotive`, přičti 3 body, pokud v `retail`,
-   přičti 2 bod, jinak 0.
-- Obrat `obrat`: Firma nejlépe prodává zákazníkům se středním obratem. U malých většinou neuspěje,
-u velkých občas ano. Pokud má firma obrat menší než 10 mil. Euro, přičti `0` bodů. Pokud je mezi
-  10 a 1 000 mil. Euro, přičti `3` body, jinak `1` bod.
-- Země `zeme`: Firma je nejúspěšnější v `CZ` Česku a na `SK` Slovensku (2 body), o něco méně v `DE` Německu a ve `FR` Francii (1 bod).
-  Ostatním zemím dej `0`.
-- Konference `konference`: Firma loni pořádala odbornou konferenci pro zákazníky. Pokud se zákazník konference
-účastnil, přičti 1 bod, jinak 0.
-- Newsletter `newsletter`: Firma též rozesílá newsletter o svém produktu. Pokud zákazník newsletter odebírá,
-přičti 1 bod.
-  
-Deklaruj funkci `odhad_sance`, které bude mít 5 parametrů, které reprezentují zadaná kritéria. Poslední dvě
-kritéria zadej jako nepovinná s výchozí hodnotou `False`. Funkce vrátí šanci na získání zakázky
-jako řetězec.
+| Kritérium | Klíč v datech | Body |
+|---|---|---|
+| Odvětví | `odvetvi` | `automotive` 3, `retail` 2, jiné 0 |
+| Obrat (mil. EUR) | `obrat` | méně než 10 → 0, od 10 do 1 000 včetně → 3, více než 1 000 → 1 |
+| Země | `zeme` | `CZ`, `SK` 2, `DE`, `FR` 1, jiné 0 |
+| Účast na loňské konferenci | `konference` | ano 1, ne 0 |
+| Odběr newsletteru | `newsletter` | ano 1, ne 0 |
 
+Podle součtu bodů určete šanci na získání zakázky:
 
-## Vstupní data
-Seznam poptávek nám přepsal juniorní developer. Před použitím dat je třeba je zkontrolovat a případně opravit.
+| Body | Šance |
+|---|---|
+| 0–4 | `malá` |
+| 5–8 | `střední` |
+| 9–10 | `vysoká` |
 
-```python
-poptavka = [
-    {"nazev": "Firma A", "odvetvi": "automotive", "obrat": 50, "zeme": "CZ", "konference": True, "newsletter": True},
-    {"nazev": "Firma B", "odvetvi": "retail", "obrat": 500, "zeme": "SK", "konference": False, "newsletter": True},
-    {"nazev": "Firma C", "odvetvi": "automotive", "obrat": 5, "zeme": "DE", "konference": True, "newsletter": False},
-    {"nazev": "Firma D", "odvetvi": "retail", "obrat": 1500, "zeme": "FR", "konference": False, "newsletter": False},
-    {"nazev": "Firma E", "odvetvi": "automotive", "obrat": "20", "zeme": "CZ", "konference": True, "newsletter": True},
-    {"nazev": "Firma F", "odvetvi": "retail", "obrat": 800, "zeme": "SK", "konference": False, "newsletter": True},
-    {"nazev": "Firma G", "odvetvi": "automotive", "obrat": 2000, "zeme": "DE", "konference": True, "newsletter": False},
-    {"nazev": "Firma H", "odvetvi": "retail", "obrat": 50, "zeme": "FR", "konference": False, "newsletter": False},
-    {"nazev": "Firma I", "odvetvi": "automotive", "obrat": "100", "zeme": "CZ", "konference": True, "newsletter": True},
-    {"nazev": "Firma J", "odvetvi": "retail", "obrat": 300, "zeme": "SK", "konference": False, "newsletter": True}
-    {"nazev": "Firma K", "odvetvi": "finance", "obrat": 200, "zeme": "CZ", "konference": True, "newsletter": True},
-    {"nazev": "Firma L", "odvetvi": "healthcare", "obrat": 700, "zeme": "SK", "konference": False, "newsletter": True},
-    {"nazev": "Firma M", "odvetvi": "technology", "obrat": 1200, "zeme": "DE", "konference": True, "newsletter": False},
-    {"nazev": "Firma N", "odvetvi": "education", "obrat": 300, "zeme": "FR", "konference": False, "newsletter": False},
-    {"nazev": "Firma O", "odvetvi": "energy", "obrat": 900, "zeme": "CZ", "konference": True, "newsletter": True}
-]
+## Úkoly
+
+### 1. Kontrola vstupních dat
+Seznam poptávek `poptavka` v souboru `reseni.py` přepisoval juniorní developer a udělal v něm 5 chyb.
+Najděte je a opravte. Ke každé opravě připište komentář `# OPRAVA: ...`.
+
+### 2. Výpočet bodů
+Napište funkci, která pro jednu zakázku spočítá body podle zadaných kritérií.
+Účast na konferenci a odběr newsletteru ať jsou nepovinné údaje – pokud je nezadáme, počítá se s „ne“.
+
+### 3. Určení šance
+Napište funkci, která podle počtu bodů vrátí šanci na získání zakázky jako text.
+
+### 4. Výstupy
+Pomocí svých funkcí zpracujte všechny firmy ze seznamu `poptavka` a na obrazovku vypište:
+1. šanci a počet bodů každé firmy (ve stejném pořadí jako v seznamu),
+2. průměrný počet bodů zaokrouhlený na 2 desetinná místa,
+3. názvy **všech** firem s nejvyšším počtem bodů (může jich být více),
+4. tři firmy s nejvyšším počtem bodů seřazené sestupně; při shodě bodů zachovejte pořadí ze seznamu.
+
+### Formát výstupu
+Místo `<…>` doplňte skutečné hodnoty.
 ```
+<název> má šanci na získání zakázky: <šance> (body: <body>)
+...
 
-## Výstupy
+Průměrný počet bodů: <průměr>
 
-- Vypočítej šanci na získání zakázky pro všechny firmy v `poptavka` a vypiš je na obrazovku.
-- Vypočítejte průměrný počet bodů pro všechny firmy v `poptavka` a vypište ho na obrazovku.
-- Jaká firma má největší šanci na získání zakázky? Vypište její název na obrazovku.
-- Seřaďte firmy sestupně podle šance na získání a zobrazte první tři.
+Firmy s nejvyšším počtem bodů: <název>, <název>, ...
+
+Tři nejlepší firmy:
+<název> má šanci na získání zakázky: <šance> (body: <body>)
+...
+```
 
 ### Očekávaný výstup
+Podle něj si můžete ověřit, zda váš program počítá správně.
 ```
-Firma Firma A má šanci na získání zakázky: vysoká (body: 10)
-Firma Firma B má šanci na získání zakázky: střední (body: 8)
-Firma Firma C má šanci na získání zakázky: vysoká (body: 5)
-Firma Firma D má šanci na získání zakázky: malá (body: 4)
-Firma Firma E má šanci na získání zakázky: vysoká (body: 9)
-Firma Firma F má šanci na získání zakázky: střední (body: 8)
-Firma Firma G má šanci na získání zakázky: střední (body: 6)
-Firma Firma H má šanci na získání zakázky: střední (body: 6)
-Firma Firma I má šanci na získání zakázky: vysoká (body: 10)
-Firma Firma J má šanci na získání zakázky: střední (body: 8)
-Firma Firma K má šanci na získání zakázky: střední (body: 7)
-Firma Firma L má šanci na získání zakázky: střední (body: 6)
-Firma Firma M má šanci na získání zakázky: malá (body: 3)
-Firma Firma N má šanci na získání zakázky: malá (body: 4)
-Firma Firma O má šanci na získání zakázky: střední (body: 7)
+Firma A má šanci na získání zakázky: vysoká (body: 10)
+Firma B má šanci na získání zakázky: střední (body: 8)
+Firma C má šanci na získání zakázky: střední (body: 5)
+Firma D má šanci na získání zakázky: malá (body: 4)
+Firma E má šanci na získání zakázky: vysoká (body: 9)
+Firma F má šanci na získání zakázky: střední (body: 8)
+Firma G má šanci na získání zakázky: střední (body: 6)
+Firma H má šanci na získání zakázky: střední (body: 6)
+Firma I má šanci na získání zakázky: vysoká (body: 10)
+Firma J má šanci na získání zakázky: střední (body: 8)
+Firma K má šanci na získání zakázky: střední (body: 7)
+Firma L má šanci na získání zakázky: střední (body: 6)
+Firma M má šanci na získání zakázky: malá (body: 3)
+Firma N má šanci na získání zakázky: malá (body: 4)
+Firma O má šanci na získání zakázky: střední (body: 7)
 
-Průměrný počet bodů pro všechny firmy: 6.73
+Průměrný počet bodů: 6.73
 
-Firma s největší šancí na získání zakázky: Firma A
+Firmy s nejvyšším počtem bodů: Firma A, Firma I
 
-První tři firmy seřazené podle šance na získání zakázky:
-Firma Firma A má šanci na získání zakázky: vysoká (body: 10)
-Firma Firma I má šanci na získání zakázky: vysoká (body: 10)
-Firma Firma E má šanci na získání zakázky: vysoká (body: 9)
+Tři nejlepší firmy:
+Firma A má šanci na získání zakázky: vysoká (body: 10)
+Firma I má šanci na získání zakázky: vysoká (body: 10)
+Firma E má šanci na získání zakázky: vysoká (body: 9)
 ```
