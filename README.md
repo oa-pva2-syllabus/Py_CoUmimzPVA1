@@ -63,6 +63,9 @@ Pomocí svých funkcí zpracujte všechny firmy ze seznamu `poptavka` a na obraz
 3. názvy **všech** firem s nejvyšším počtem bodů (může jich být více),
 4. tři firmy s nejvyšším počtem bodů seřazené sestupně; při shodě bodů zachovejte pořadí ze seznamu.
 
+### Bonus
+Zbývá-li vám čas, vypište, kolik firem spadá do každé kategorie šance (`malá`, `střední`, `vysoká`).
+
 ### Formát výstupu
 Místo `<…>` doplňte skutečné hodnoty.
 ```
@@ -76,6 +79,11 @@ Firmy s nejvyšším počtem bodů: <název>, <název>, ...
 Tři nejlepší firmy:
 <název> má šanci na získání zakázky: <šance> (body: <body>)
 ...
+
+Počet firem podle šance:
+malá: <počet>
+střední: <počet>
+vysoká: <počet>
 ```
 
 ### Očekávaný výstup
@@ -105,4 +113,9 @@ Tři nejlepší firmy:
 Firma A má šanci na získání zakázky: vysoká (body: 10)
 Firma I má šanci na získání zakázky: vysoká (body: 10)
 Firma E má šanci na získání zakázky: vysoká (body: 9)
+
+Počet firem podle šance:
+malá: 3
+střední: 9
+vysoká: 3
 ```
