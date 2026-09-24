@@ -27,13 +27,13 @@ Hodně štěstí – věřím, že toho umíte víc, než si myslíte!
 Obchodníci v naší softwarové firmě odhadují šanci na získání zakázky jednoduchým bodovým systémem.
 Každá zakázka získá 0 až 10 bodů podle těchto kritérií:
 
-| Kritérium | Klíč v datech | Body |
-|---|---|---|
-| Odvětví | `odvetvi` | `automotive` 3, `retail` 2, jiné 0 |
+| Kritérium | Klíč v datech | Body                                                           |
+|---|---|----------------------------------------------------------------|
+| Odvětví | `odvetvi` | `automotive` 3, `retail` 2, jiné 0                             |
 | Obrat (mil. EUR) | `obrat` | méně než 10 → 0, od 10 do 1 000 včetně → 3, více než 1 000 → 1 |
-| Země | `zeme` | `CZ`, `SK` 2, `DE`, `FR` 1, jiné 0 |
-| Účast na loňské konferenci | `konference` | ano 1, ne 0 |
-| Odběr newsletteru | `newsletter` | ano 1, ne 0 |
+| Země | `zeme` | `CZ` a `SK` 2, `DE` a `FR` 1, jiné 0                           |
+| Účast na loňské konferenci | `konference` | ano 1, ne 0                                                    |
+| Odběr newsletteru | `newsletter` | ano 1, ne 0                                                    |
 
 Podle součtu bodů určete šanci na získání zakázky:
 
@@ -46,8 +46,8 @@ Podle součtu bodů určete šanci na získání zakázky:
 ## Úkoly
 
 ### 1. Kontrola vstupních dat
-Seznam poptávek `poptavka` v souboru `reseni.py` přepisoval juniorní developer a udělal v něm 5 chyb.
-Najděte je a opravte. Ke každé opravě připište komentář `# OPRAVA: ...`.
+Seznam poptávek `poptavka` v souboru `reseni.py` přepisoval juniorní developer a možná v něm udělal v něm chyby.
+Zkontrolujte a případné chyby opravte.
 
 ### 2. Výpočet bodů
 Napište funkci, která pro jednu zakázku spočítá body podle zadaných kritérií.
